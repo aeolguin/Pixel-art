@@ -22,6 +22,8 @@ var nombreColores = ['White', 'LightYellow',
 
 var paleta = document.getElementById("paleta");
 var grillaPixel = document.getElementById("grilla-pixeles");
+var indicadorDeColor = document.getElementById("indicador-de-color");
+
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
@@ -32,29 +34,48 @@ colorPersonalizado.addEventListener('change',
     // Se guarda el color de la rueda en colorActual
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
-
+    indicadorDeColor.style.backgroundColor = colorActual;
 
   })
 );
 
+function colorSeleccionado(e) {
+  indicadorDeColor.style.backgroundColor= e.target.style.backgroundColor;
+}
+
+function pintaColor(e) {
+  e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
+}
+
+function pintaContinuo(e) {
+  console.log(e);
+}
+
+function dejaDePintar(e) {
+  console.log(e);
+}
+
 function paletaColores () {
   for (i=0 ; i<nombreColores.length ; i++) {
     var pal1 = document.createElement("div");
-    var padre = document.getElementById("paleta");
-    padre.appendChild(pal1);
+    paleta.appendChild(pal1);
     pal1.className = "color-paleta";
     pal1.style.backgroundColor = nombreColores[i];
-
+    pal1.addEventListener("click" , colorSeleccionado);
+    
   }
 }
 
 function grillaPixeles() {
   for (i=0 ; i< 1750; i++){
     var grill1 = document.createElement("div");
-    var padre = document.getElementById("grilla-pixeles");
-    padre.appendChild(grill1);
+    grillaPixel.appendChild(grill1);
+    grill1.addEventListener("click" , pintaColor);
+    grill1.addEventListener("mousedown", pintaContinuo);
+    grill1.addEventListener("mouseup", dejaDePintar);
   }
 }
+
 
 // Invocamos las Funciones
 paletaColores();
