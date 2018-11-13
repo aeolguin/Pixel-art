@@ -47,12 +47,19 @@ function pintaColor(e) {
   e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
 }
 
-function pintaContinuo(e) {
-  console.log(e);
+var mouseDown;
+function mouseDown(e){
+  mouseDown = true
 }
 
-function dejaDePintar(e) {
-  console.log(e);
+function dejaDePintar(e){
+  mouseDown = false
+}
+
+function pintaContinuo(e){
+  if(mouseDown){
+    e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
+  }
 }
 
 function paletaColores () {
@@ -71,8 +78,9 @@ function grillaPixeles() {
     var grill1 = document.createElement("div");
     grillaPixel.appendChild(grill1);
     grill1.addEventListener("click" , pintaColor);
-    grill1.addEventListener("mousedown", pintaContinuo);
+    grill1.addEventListener("mousedown", mouseDown);
     grill1.addEventListener("mouseup", dejaDePintar);
+    grill1.addEventListener("mousemove", pintaContinuo);
   }
 }
 
