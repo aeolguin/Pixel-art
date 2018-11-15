@@ -23,7 +23,9 @@ var nombreColores = ['White', 'LightYellow',
 var paleta = document.getElementById("paleta");
 var grillaPixel = document.getElementById("grilla-pixeles");
 var indicadorDeColor = document.getElementById("indicador-de-color");
+var mousePresionado = false;
 
+console.log(mousePresionado);
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
@@ -47,17 +49,17 @@ function pintaColor(e) {
   e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
 }
 
-var mouseDown;
+
 function mouseDown(e){
-  mouseDown = true
+  mousePresionado = true
 }
 
 function dejaDePintar(e){
-  mouseDown = false
+  mousePresionado = false
 }
 
 function pintaContinuo(e){
-  if(mouseDown){
+  if(mousePresionado){
     e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
   }
 }
