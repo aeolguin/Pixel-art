@@ -79,6 +79,7 @@ function grillaPixeles() {
   for (i=0 ; i< 1750; i++){
     var grill1 = document.createElement("div");
     grillaPixel.appendChild(grill1);
+    grill1.className = "pixel-grilla";
     grill1.addEventListener("click" , pintaColor);
     grill1.addEventListener("mousedown", mouseDown);
     grill1.addEventListener("mouseup", dejaDePintar);
@@ -86,7 +87,24 @@ function grillaPixeles() {
   }
 }
 
+function borrarTodo() {
+  $(document).ready(function(){
+    var $elemento = $(".pixel-grilla");
+    console.log($elemento);
+    $elemento.animate({"opacity":"1","background-color": "white"} , 100);
+    console.log($elemento); 
+  })
+  }
+  
+
+function botonBorrar() {
+  var aprietaBoton = document.getElementById("borrar");
+  aprietaBoton.addEventListener("click" , borrarTodo); 
+}
+
+
 
 // Invocamos las Funciones
 paletaColores();
 grillaPixeles();
+botonBorrar();
