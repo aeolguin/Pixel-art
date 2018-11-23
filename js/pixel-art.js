@@ -91,15 +91,49 @@ function borrarTodo() {
   $(document).ready(function(){
     var $elemento = $(".pixel-grilla");
     console.log($elemento);
-    $elemento.animate({"opacity":"1","background-color": "white"} , 100);
-    console.log($elemento); 
+    $elemento.animate({
+      opacity:"0,5",
+      backgroundColor:"white"},
+       1500);
   })
   }
   
-
 function botonBorrar() {
-  var aprietaBoton = document.getElementById("borrar");
-  aprietaBoton.addEventListener("click" , borrarTodo); 
+  $(document).ready(function(){
+    var $aprietaBoton = $("#borrar");
+    $aprietaBoton.click(borrarTodo); 
+  })
+}
+
+function cargadorDeSuperheroe(e) {
+  var cargar = e.target.id;
+  if (cargar === "batman") {
+    cargarSuperheroe(batman);
+  }
+  if (cargar === "wonder"){
+    cargarSuperheroe(wonder);
+  }
+  if (cargar === "flash"){
+    cargarSuperheroe(flash);
+  }
+  if (cargar === "invisible"){
+    cargarSuperheroe(invisible);
+  }
+}
+
+function superCarga(){
+  $(document).ready(function() {
+    var $heroe = $(".superCarga");
+    $heroe.click(cargadorDeSuperheroe);
+  })
+}
+
+
+function guardaImagen(){
+  $(document).ready(function(){
+    var $guardarImagen = $("#guardar");
+    $guardarImagen.click(guardarPixelArt);
+  })
 }
 
 
@@ -108,3 +142,5 @@ function botonBorrar() {
 paletaColores();
 grillaPixeles();
 botonBorrar();
+superCarga();
+guardaImagen();
