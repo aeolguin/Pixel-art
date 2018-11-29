@@ -23,9 +23,8 @@ var nombreColores = ['White', 'LightYellow',
 var paleta = document.getElementById("paleta");
 var grillaPixel = document.getElementById("grilla-pixeles");
 var indicadorDeColor = document.getElementById("indicador-de-color");
-var mousePresionado = false;
+var $mousePresionado = false;
 
-console.log(mousePresionado);
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
@@ -51,50 +50,53 @@ function pintaColor(e) {
 
 
 function mouseDown(e){
-  mousePresionado = true
+  $mousePresionado = true
 }
 
 function dejaDePintar(e){
-  mousePresionado = false
+  $mousePresionado = false
 }
 
 function pintaContinuo(e){
-  if(mousePresionado){
+  if($mousePresionado){
     e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
   }
 }
 
 function paletaColores () {
   for (i=0 ; i<nombreColores.length ; i++) {
-    var pal1 = document.createElement("div");
-    paleta.appendChild(pal1);
-    pal1.className = "color-paleta";
-    pal1.style.backgroundColor = nombreColores[i];
-    pal1.addEventListener("click" , colorSeleccionado);
+    $("#paleta").append("<div></div>");
+    var $pal1 = $("#paleta div");
+    $pal1.addClass("color-paleta");
+    $pal1.css("backgroundColor" , "nombreColores[i]");
+    //pal1.style.backgroundColor = nombreColores[i];
+    $pal1.click(colorSeleccionado);
     
   }
 }
 
 function grillaPixeles() {
   for (i=0 ; i< 1750; i++){
-    var grill1 = document.createElement("div");
-    grillaPixel.appendChild(grill1);
-    grill1.className = "pixel-grilla";
-    grill1.addEventListener("click" , pintaColor);
-    grill1.addEventListener("mousedown", mouseDown);
-    grill1.addEventListener("mouseup", dejaDePintar);
-    grill1.addEventListener("mousemove", pintaContinuo);
+    var $grill1 = $("#grilla-pixeles");
+    $grill1.append("<div></div>");
+    $("#grilla-pixeles div").addClass("pixel-grilla");
+    $grill1.click(pintaColor);
+    $grill1.mousedown(mouseDown);
+    $grill1.mouseup(dejaDePintar);
+    $grill1.mousemove(pintaContinuo);
   }
 }
 
 function borrarTodo() {
   $(document).ready(function(){
-    var $elemento = $(".pixel-grilla");
-    console.log($elemento);
+    var $elemento = $("#grilla-pixeles");
     $elemento.animate({
-      opacity:"0,5",
-      backgroundColor:"white"},
-       1500);
+      opacity:0.2
+    },2000, function(){
+      var $grillaBlanca = $(".pixel-grilla");
+      $grillaBlanca.css("backgroundColor","white");
+      $elemento.css("opacity", "1"); 
+    });
   })
   }
   
@@ -106,6 +108,8 @@ function botonBorrar() {
 }
 
 function cargadorDeSuperheroe(e) {
+  var miobjeto = [{e}]
+  console.log(miobjeto.target);
   var cargar = e.target.id;
   if (cargar === "batman") {
     cargarSuperheroe(batman);
