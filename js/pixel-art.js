@@ -20,11 +20,8 @@ var nombreColores = ['White', 'LightYellow',
   'DimGray', 'LightSlateGray', 'DarkSlateGray', 'Black'
 ];
 
-var paleta = document.getElementById("paleta");
-var grillaPixel = document.getElementById("grilla-pixeles");
 var indicadorDeColor = document.getElementById("indicador-de-color");
 var $mousePresionado = false;
-
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
@@ -48,7 +45,6 @@ function pintaColor(e) {
   e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
 }
 
-
 function mouseDown(e){
   $mousePresionado = true
 }
@@ -65,12 +61,11 @@ function pintaContinuo(e){
 
 function paletaColores () {
   for (i=0 ; i<nombreColores.length ; i++) {
-    $("#paleta").append("<div></div>");
-    var $pal1 = $("#paleta div");
-    $pal1.addClass("color-paleta");
-    $pal1.css("backgroundColor" , "nombreColores[i]");
-    //pal1.style.backgroundColor = nombreColores[i];
-    $pal1.click(colorSeleccionado);
+    var pal1 = document.createElement("div");
+    paleta.appendChild(pal1);
+    pal1.className = "color-paleta";
+    pal1.style.backgroundColor = nombreColores[i];
+    pal1.addEventListener("click" , colorSeleccionado);
     
   }
 }
@@ -88,59 +83,51 @@ function grillaPixeles() {
 }
 
 function borrarTodo() {
-  $(document).ready(function(){
     var $elemento = $("#grilla-pixeles");
     $elemento.animate({
       opacity:0.2
-    },2000, function(){
+    },1000, function(){
       var $grillaBlanca = $(".pixel-grilla");
       $grillaBlanca.css("backgroundColor","white");
       $elemento.css("opacity", "1"); 
     });
-  })
   }
   
 function botonBorrar() {
-  $(document).ready(function(){
     var $aprietaBoton = $("#borrar");
     $aprietaBoton.click(borrarTodo); 
-  })
 }
 
 function cargadorDeSuperheroe(e) {
-  var miobjeto = [{e}]
-  console.log(miobjeto.target);
-  var cargar = e.target.id;
-  if (cargar === "batman") {
-    cargarSuperheroe(batman);
-  }
-  if (cargar === "wonder"){
-    cargarSuperheroe(wonder);
-  }
-  if (cargar === "flash"){
-    cargarSuperheroe(flash);
-  }
-  if (cargar === "invisible"){
-    cargarSuperheroe(invisible);
-  }
+  var miObjeto = {e};
+  console.log(miObjeto[0].id);
+  var carga = miObjeto.cargar;
+  console.log(carga.toString());
+  //cargadorDeSuperheroe(carga.toString());
+  //var cargar = e.target.id;
+  //if (cargar === "batman") {
+  //  cargarSuperheroe(batman);
+  //}
+  //if (cargar === "wonder"){
+  //  cargarSuperheroe(wonder);
+  //}
+  //if (cargar === "flash"){
+  //  cargarSuperheroe(flash);
+  //}
+  //if (cargar === "invisible"){
+  //  cargarSuperheroe(invisible);
+  //}
 }
 
 function superCarga(){
-  $(document).ready(function() {
     var $heroe = $(".superCarga");
     $heroe.click(cargadorDeSuperheroe);
-  })
 }
-
 
 function guardaImagen(){
-  $(document).ready(function(){
     var $guardarImagen = $("#guardar");
     $guardarImagen.click(guardarPixelArt);
-  })
 }
-
-
 
 // Invocamos las Funciones
 paletaColores();
