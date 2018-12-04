@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 var nombreColores = ['White', 'LightYellow',
   'LemonChiffon', 'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff', 'PaleGoldenrod', 'Bisque', 'NavajoWhite', 'Wheat', 'BurlyWood', 'Tan',
   'Khaki', 'Yellow', 'Gold', 'Orange', 'DarkOrange', 'OrangeRed', 'Tomato', 'Coral', 'DarkSalmon', 'LightSalmon', 'LightCoral', 'Salmon', 'PaleVioletRed',
@@ -60,26 +62,26 @@ function pintaContinuo(e){
 }
 
 function paletaColores () {
+  var $paleta = $('#paleta')
   for (i=0 ; i<nombreColores.length ; i++) {
-    var pal1 = document.createElement("div");
-    paleta.appendChild(pal1);
-    pal1.className = "color-paleta";
-    pal1.style.backgroundColor = nombreColores[i];
-    pal1.addEventListener("click" , colorSeleccionado);
-    
+    var elem = $('<div></div>')  
+    $paleta.append(elem)
+    elem.css('background-color',nombreColores[i])
   }
+  elem.addClass('color-paleta')
+  elem.click(colorSeleccionado)
 }
 
 function grillaPixeles() {
+  var $grill1 = $("#grilla-pixeles");
   for (i=0 ; i< 1750; i++){
-    var $grill1 = $("#grilla-pixeles");
     $grill1.append("<div></div>");
-    $("#grilla-pixeles div").addClass("pixel-grilla");
+  }
+  $("#grilla-pixeles div").addClass("pixel-grilla");
     $grill1.click(pintaColor);
     $grill1.mousedown(mouseDown);
     $grill1.mouseup(dejaDePintar);
     $grill1.mousemove(pintaContinuo);
-  }
 }
 
 function borrarTodo() {
@@ -98,30 +100,11 @@ function botonBorrar() {
     $aprietaBoton.click(borrarTodo); 
 }
 
-function cargadorDeSuperheroe(e) {
-  var miObjeto = {e};
-  console.log(miObjeto[0].id);
-  var carga = miObjeto.cargar;
-  console.log(carga.toString());
-  //cargadorDeSuperheroe(carga.toString());
-  //var cargar = e.target.id;
-  //if (cargar === "batman") {
-  //  cargarSuperheroe(batman);
-  //}
-  //if (cargar === "wonder"){
-  //  cargarSuperheroe(wonder);
-  //}
-  //if (cargar === "flash"){
-  //  cargarSuperheroe(flash);
-  //}
-  //if (cargar === "invisible"){
-  //  cargarSuperheroe(invisible);
-  //}
-}
-
 function superCarga(){
     var $heroe = $(".superCarga");
-    $heroe.click(cargadorDeSuperheroe);
+    $heroe.click(function(){
+    cargarSuperheroe(window[$(this).attr("id")]);
+    })
 }
 
 function guardaImagen(){
@@ -135,3 +118,4 @@ grillaPixeles();
 botonBorrar();
 superCarga();
 guardaImagen();
+});
