@@ -22,54 +22,56 @@ var nombreColores = ['White', 'LightYellow',
   'DimGray', 'LightSlateGray', 'DarkSlateGray', 'Black'
 ];
 
-var indicadorDeColor = document.getElementById("indicador-de-color");
+//var indicadorDeColor = document.getElementById("indicador-de-color");
+var $indicadorDeColor = $("#indicador-de-color");
 var $mousePresionado = false;
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
-var colorPersonalizado = document.getElementById('color-personalizado');
 
-colorPersonalizado.addEventListener('change', 
-  (function() {
-    // Se guarda el color de la rueda en colorActual
-    colorActual = colorPersonalizado.value;
-    // Completar para que cambie el indicador-de-color al colorActual
-    indicadorDeColor.style.backgroundColor = colorActual;
+var $colorPersonalizado = $("#color-personalizado");
+console.log($colorPersonalizado);
+  $colorPersonalizado.change(function(){
+    console.log($colorPersonalizado.value);
+  var $colorActual = $colorPersonalizado.value;
+  console.log($colorActual);
+  $indicadorDeColor.css("background-color" , $colorActual);
+});
 
-  })
-);
-
-function colorSeleccionado(e) {
-  indicadorDeColor.style.backgroundColor= e.target.style.backgroundColor;
+function colorSeleccionado() {
+  var $colorElegido = $(this).css("background-color")
+  $indicadorDeColor.css("background-color" , $colorElegido);
 }
 
 function pintaColor(e) {
-  e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
+  var $colorElegido = $indicadorDeColor.css("background-color");
+  e.target.style.backgroundColor = $colorElegido;
 }
 
-function mouseDown(e){
-  $mousePresionado = true
+function mouseDown(){
+  $mousePresionado = true;
 }
 
-function dejaDePintar(e){
-  $mousePresionado = false
+function dejaDePintar(){
+  $mousePresionado = false;
 }
 
 function pintaContinuo(e){
   if($mousePresionado){
-    e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
+    var $colorElegido = $indicadorDeColor.css("background-color");
+    e.target.style.backgroundColor = $colorElegido;
   }
 }
 
 function paletaColores () {
   var $paleta = $('#paleta')
   for (i=0 ; i<nombreColores.length ; i++) {
-    var elem = $('<div></div>')  
-    $paleta.append(elem)
-    elem.css('background-color',nombreColores[i])
+    var elementos = $('<div></div>');  
+    $paleta.append(elementos);
+    elementos.css('background-color',nombreColores[i]);
   }
-  elem.addClass('color-paleta')
-  elem.click(colorSeleccionado)
+  $("#paleta div").addClass('color-paleta');
+  $("#paleta div").click(colorSeleccionado);
 }
 
 function grillaPixeles() {
