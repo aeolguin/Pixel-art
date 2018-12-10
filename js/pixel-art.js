@@ -30,16 +30,13 @@ var $mousePresionado = false;
 // Es decir, el que se elige con la rueda de color.
 
 var $colorPersonalizado = $("#color-personalizado");
-console.log($colorPersonalizado);
   $colorPersonalizado.change(function(){
-    console.log($colorPersonalizado.value);
-  var $colorActual = $colorPersonalizado.value;
-  console.log($colorActual);
+  var $colorActual = $colorPersonalizado.val();
   $indicadorDeColor.css("background-color" , $colorActual);
 });
 
 function colorSeleccionado() {
-  var $colorElegido = $(this).css("background-color")
+  var $colorElegido = $(this).css("background-color");
   $indicadorDeColor.css("background-color" , $colorElegido);
 }
 
@@ -64,7 +61,7 @@ function pintaContinuo(e){
 }
 
 function paletaColores () {
-  var $paleta = $('#paleta')
+  var $paleta = $('#paleta');
   for (i=0 ; i<nombreColores.length ; i++) {
     var elementos = $('<div></div>');  
     $paleta.append(elementos);
@@ -104,9 +101,12 @@ function botonBorrar() {
 
 function superCarga(){
     var $heroe = $(".superCarga");
+    $heroe.mousemove(function (){
+      $heroe.css("cursor", "pointer");
+    });
     $heroe.click(function(){
     cargarSuperheroe(window[$(this).attr("id")]);
-    })
+    });
 }
 
 function guardaImagen(){
