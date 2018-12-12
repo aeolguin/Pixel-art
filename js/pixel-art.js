@@ -40,9 +40,20 @@ function colorSeleccionado() {
   $indicadorDeColor.css("background-color" , $colorElegido);
 }
 
+function paletaColores () {
+  var $paleta = $('#paleta');
+  for (var i=0 ; i<nombreColores.length ; i++) {
+    var elementos = $('<div></div>');  
+    $paleta.append(elementos);
+    elementos.css('background-color',nombreColores[i]);
+  }
+  $("#paleta div").addClass('color-paleta');
+  $("#paleta div").click(colorSeleccionado);
+}
+
 function pintaColor(e) {
   var $colorElegido = $indicadorDeColor.css("background-color");
-  e.target.style.backgroundColor = $colorElegido;
+  $(e.target).css("background-color", $colorElegido);
 }
 
 function mouseDown(){
@@ -56,24 +67,13 @@ function dejaDePintar(){
 function pintaContinuo(e){
   if($mousePresionado){
     var $colorElegido = $indicadorDeColor.css("background-color");
-    e.target.style.backgroundColor = $colorElegido;
+    $(e.target).css("background-color", $colorElegido);
   }
-}
-
-function paletaColores () {
-  var $paleta = $('#paleta');
-  for (i=0 ; i<nombreColores.length ; i++) {
-    var elementos = $('<div></div>');  
-    $paleta.append(elementos);
-    elementos.css('background-color',nombreColores[i]);
-  }
-  $("#paleta div").addClass('color-paleta');
-  $("#paleta div").click(colorSeleccionado);
 }
 
 function grillaPixeles() {
   var $grill1 = $("#grilla-pixeles");
-  for (i=0 ; i< 1750; i++){
+  for (var i=0 ; i< 1750; i++){
     $grill1.append("<div></div>");
   }
   $("#grilla-pixeles div").addClass("pixel-grilla");
@@ -86,7 +86,7 @@ function grillaPixeles() {
 function borrarTodo() {
     var $elemento = $("#grilla-pixeles");
     $elemento.animate({
-      opacity:0.2
+      opacity:0.1
     },1000, function(){
       var $grillaBlanca = $(".pixel-grilla");
       $grillaBlanca.css("backgroundColor","white");
@@ -102,7 +102,7 @@ function botonBorrar() {
 function superCarga(){
     var $heroe = $(".superCarga");
     $heroe.mousemove(function (){
-      $heroe.css("cursor", "pointer");
+      $heroe.css("cursor", "url(img/manito.png), auto");
     });
     $heroe.click(function(){
     cargarSuperheroe(window[$(this).attr("id")]);

@@ -36,7 +36,8 @@ button {
   margin: 10px 5px;
   -webkit-transition: all 0.25s ease-in-out 0s;
   transition: all 0.25s ease-in-out 0s;
-  cursor: pointer;
+  /*cursor: pointer;*/
+  cursor: url(../img/manito.png), auto;
 }
 button:hover{
   background: grey;
@@ -72,7 +73,8 @@ input[type="color"] {
   padding: 0;
   height: 30px;
   width: 30px;
-  cursor: pointer;
+  cursor: url(../img/manito.png), auto;
+  /*cursor: pointer;*/
 }
 input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 0;
@@ -85,7 +87,8 @@ input[type="color"]::-webkit-color-swatch {
   display: inline-block;
   height: 15px;
   width: 15px;
-  cursor: pointer;
+  cursor: url(../img/manito.png), auto;
+  /*cursor: pointer;*/
   margin: 0;
     outline: 1px solid white;
 }
